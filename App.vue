@@ -1,14 +1,12 @@
 <template>
-  <ul class="box">
-    <template v-for="item in 50">
-      <li :key="item">
-        <img v-lazy="'https://picsum.photos/100/100?random='+ Math.random()" alt="">
-      </li>
-    </template>
-  </ul>
+  <div>
+    <button @click="showMessage">点我</button>
+  </div>
 </template>
 
 <script>
+import { Message } from './vue-message/index.js'
+
 export default {
   components: {
   },
@@ -16,17 +14,26 @@ export default {
     return {
     
     }
+  },
+  mounted () {
+  },
+  methods: {
+    showMessage () {
+      const type = ['success', 'error', 'warning'][this.getRandomIntInclusive(0, 2)]
+      console.log(type, this.getRandomIntInclusive(0, 2))
+      Message({
+        type: type,
+        message: '我是内容我是内容我是内容我是内容我是内容'
+      })
+    },
+    getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
+    }
   }
 }
 </script>
 
 <style scoped>
-.box {
-  height: 400px;
-  overflow-y: scroll;
-}
-img {
-  width: 100px;
-  height: 100px;
-}
 </style>
